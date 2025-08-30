@@ -39,7 +39,9 @@ const emit = defineEmits(["transectionSumitted"]);
 const text = ref("");
 const amount = ref("");
 const type = ref("income");
+ const now = new Date();
 const onSubmit = () => {
+  const timeString = now.toLocaleTimeString();
   if (!text.value || !amount.value) {
     toast.error("All Filds are Required");
     return;
@@ -54,6 +56,7 @@ const onSubmit = () => {
     text: text.value,
     amount: parseFloat(amount.value),
     type: type.value,
+    time:timeString
   };
   emit("transectionSumitted", transectiondata);
   text.value = "";

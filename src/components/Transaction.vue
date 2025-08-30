@@ -6,7 +6,9 @@
       :key="transaction.id"
       :class="transaction.type == 'expense' ? 'minus' : 'plus'"
     >
-      {{ transaction.text }} <span>{{ transaction.amount.toFixed(2) }}</span
+      <span>{{ transaction.text }}</span>
+      <span>{{ transaction.time }}</span>
+      <span>{{ transaction.type == 'expense' ? '-' : '+' }}<span></span>{{ transaction.amount.toFixed(2) }}</span
       ><button class="delete-btn" @click="tranctiondeletv(transaction.id)">x</button>
     </li>
    

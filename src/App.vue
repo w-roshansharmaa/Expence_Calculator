@@ -80,6 +80,7 @@ const handletransectiosubmited = (transectiondata) => {
     text: transectiondata.text,
     amount: transectiondata.amount,
     type: transectiondata.type,
+    time:transectiondata.time
   });
   toast.success("Transection Added Successfully");
   saveLocal()
