@@ -34,14 +34,25 @@ onMounted(() => {
 });
 
 const total = computed(() => {
-  return transactions.value.reduce((acc, tran) => {
-    return acc + tran.amount;
-    // return amount;
-  }, 0);
+let exp=  transactions.value
+    .filter((t) => t.type=='expense')
+    .reduce((acc, tran) => {
+      return acc + tran.amount;
+    }, 0)
+    .toFixed(2);
+let inc=  transactions.value
+    .filter((t) => t.type=='income')
+    .reduce((acc, tran) => {
+      return acc + tran.amount;
+    }, 0)
+    .toFixed(2);
+
+    return inc-exp
 });
 const income = computed(() => {
   return transactions.value
-    .filter((t) => t.amount > 0)
+    .filter((t) => {
+      return t.type=='income'})
     .reduce((acc, tran) => {
       return acc + tran.amount;
     }, 0)
@@ -49,7 +60,7 @@ const income = computed(() => {
 });
 const expense = computed(() => {
   return transactions.value
-    .filter((t) => t.amount < 0)
+    .filter((t) => t.type=='expense')
     .reduce((acc, tran) => {
       return acc + tran.amount;
     }, 0)
@@ -68,6 +79,7 @@ const handletransectiosubmited = (transectiondata) => {
     id: generateId(),
     text: transectiondata.text,
     amount: transectiondata.amount,
+    type: transectiondata.type,
   });
   toast.success("Transection Added Successfully");
   saveLocal()
